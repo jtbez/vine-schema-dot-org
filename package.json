@@ -1,0 +1,61 @@
+{
+  "name": "@linxhq/vine-schema-dot-org",
+  "version": "1.0.0",
+  "description": "Converts the full Schema.org specification into strongly-typed VineJS schemas with full inheritance, enumerations, and data type support.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "generate": "tsc -p tsconfig.generator.json && node dist/generator.js",
+    "build": "rm -rf src/generated && pnpm run generate && tsc -p tsconfig.build.json",
+    "test": "jest --config jest.config.cjs",
+    "prepare": "pnpm run build"
+  },
+  "keywords": [
+    "schema.org",
+    "vinejs",
+    "vine",
+    "validation",
+    "typescript",
+    "json-ld",
+    "structured-data",
+    "schema-validation"
+  ],
+  "author": "jt.bez",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linxhq/vine-schema-dot-org.git"
+  },
+  "bugs": {
+    "url": "https://github.com/linxhq/vine-schema-dot-org/issues"
+  },
+  "homepage": "https://github.com/linxhq/vine-schema-dot-org#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "packageManager": "pnpm@10.29.3",
+  "dependencies": {
+    "@vinejs/vine": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

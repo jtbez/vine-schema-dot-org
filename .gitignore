@@ -1,0 +1,17 @@
+# Package Manager
+node_modules
+
+# Generated on Install
+src/generated/**
+dist/**
+
+# Testing
+coverage/
+
+# OS & IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Environment
+.env*

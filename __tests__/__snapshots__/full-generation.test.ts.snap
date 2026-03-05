@@ -1,0 +1,644 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`full generation produces expected files, compiles, and uses vine: Person.ts 1`] = `
+"// ⚠️ AUTO-GENERATED - schema:Person
+import vine from '@vinejs/vine'
+import { Thing } from './Thing'
+import type { Brand } from './Brand'
+import type { Certification } from './Certification'
+import type { ContactPoint } from './ContactPoint'
+import type { Country } from './Country'
+import type { CreativeWork } from './CreativeWork'
+import type { DefinedTerm } from './DefinedTerm'
+import type { Demand } from './Demand'
+import type { Distance } from './Distance'
+import type { EducationalOccupationalCredential } from './EducationalOccupationalCredential'
+import type { EducationalOrganization } from './EducationalOrganization'
+import type { Event } from './Event'
+import type { GenderType } from './GenderType'
+import type { Grant } from './Grant'
+import type { InteractionCounter } from './InteractionCounter'
+import type { Language } from './Language'
+import type { Mass } from './Mass'
+import type { MemberProgramTier } from './MemberProgramTier'
+import type { MonetaryAmount } from './MonetaryAmount'
+import type { Occupation } from './Occupation'
+import type { Offer } from './Offer'
+import type { OfferCatalog } from './OfferCatalog'
+import type { Organization } from './Organization'
+import type { Place } from './Place'
+import type { PostalAddress } from './PostalAddress'
+import type { PriceSpecification } from './PriceSpecification'
+import type { ProgramMembership } from './ProgramMembership'
+import type { QuantitativeValue } from './QuantitativeValue'
+import type { StructuredValue } from './StructuredValue'
+
+/**
+ * A person (alive, dead, undead, or fictional).
+ *
+ * @see https://schema.org/Person
+ */
+export interface Person extends Thing {
+  /** A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]]. */
+  funding?: Grant | Grant[];
+  /** An honorific prefix preceding a Person's name such as Dr/Mrs/Mr. */
+  honorificPrefix?: string;
+  /** The weight of the product or person. */
+  weight?: (Mass | QuantitativeValue) | (Mass | QuantitativeValue)[];
+  /** Awards won by or for this item. */
+  awards?: string;
+  /** The height of the item. */
+  height?: (QuantitativeValue | Distance) | (QuantitativeValue | Distance)[];
+  /** Of a [[Person]], and less typically of an [[Organization]], to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or [[JobPosting]] descriptions. */
+  knowsAbout?: (string | Thing) | (string | Thing)[];
+  /** Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who are not a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of "Mixed". */
+  gender?: (string | GenderType) | (string | GenderType)[];
+  /** A person or organization that supports (sponsors) something through some kind of financial contribution. */
+  funder?: (Organization | Person) | (Organization | Person)[];
+  /** Of a [[Person]], and less typically of an [[Organization]], to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). */
+  knowsLanguage?: (Language | string) | (Language | string)[];
+  /** The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person. */
+  brand?: (Brand | Organization) | (Brand | Organization)[];
+  /** A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation. */
+  skills?: (string | DefinedTerm) | (string | DefinedTerm)[];
+  /** The North American Industry Classification System (NAICS) code for a particular organization or business person. */
+  naics?: string;
+  /** The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations. */
+  globalLocationNumber?: string;
+  /** A short string listing or describing pronouns for a person. Typically the person concerned is the best authority as pronouns are a critical part of personal identity and expression. Publishers and consumers of this information are reminded to treat this data responsibly, take country-specific laws related to gender expression into account, and be wary of out-of-date data and drawing unwarranted inferences about the person being described.
+
+In English, formulations such as "they/them", "she/her", and "he/him" are commonly used online and can also be used here. We do not intend to enumerate all possible micro-syntaxes in all languages. More structured and well-defined external values for pronouns can be referenced using the [[StructuredValue]] or [[DefinedTerm]] values.
+ */
+  pronouns?: (string | StructuredValue | DefinedTerm) | (string | StructuredValue | DefinedTerm)[];
+  /** Date of death. */
+  deathDate?: string;
+  /** An organization that this person is affiliated with. For example, a school/university, a club, or a team. */
+  affiliation?: Organization | Organization[];
+  /** The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. */
+  interactionStatistic?: InteractionCounter | InteractionCounter[];
+  /** A child of the person. */
+  children?: Person | Person[];
+  /** Physical address of the item. */
+  address?: (PostalAddress | string) | (PostalAddress | string)[];
+  /** The most generic uni-directional social relation. */
+  follows?: Person | Person[];
+  /** The most generic familial relation. */
+  relatedTo?: Person | Person[];
+  /** Nationality of the person. */
+  nationality?: Country | Country[];
+  /** An Organization (or ProgramMembership) to which this Person or Organization belongs. */
+  memberOf?: (ProgramMembership | Organization | MemberProgramTier) | (ProgramMembership | Organization | MemberProgramTier)[];
+  /** Date of birth. */
+  birthDate?: string;
+  /** A contact point for a person or organization. */
+  contactPoint?: ContactPoint | ContactPoint[];
+  /** Certification information about a product, organization, service, place, or person. */
+  hasCertification?: Certification | Certification[];
+  /** The place where the person was born. */
+  birthPlace?: Place | Place[];
+  /** The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place. */
+  isicV4?: string;
+  /** The Person's occupation. For past professions, use Role for expressing dates. */
+  hasOccupation?: Occupation | Occupation[];
+  /** A colleague of the person. */
+  colleague?: (Person | string) | (Person | string)[];
+  /** A life event like baptism, communions, Bar Mitzvahs, Aqiqah, Namakarana, Miyamairi, burial, .... */
+  lifeEvent?: Event | Event[];
+  /** An honorific suffix following a Person's name such as M.D./PhD/MSCSW. */
+  honorificSuffix?: string;
+  /** The most generic bi-directional social/work relation. */
+  knows?: Person | Person[];
+  /** The telephone number. */
+  telephone?: string;
+  /** A sibling of the person. */
+  sibling?: Person | Person[];
+  /** A contact point for a person or organization. */
+  contactPoints?: ContactPoint | ContactPoint[];
+  /** The total financial value of the person as calculated by subtracting the total value of liabilities from the total value of assets. */
+  netWorth?: (PriceSpecification | MonetaryAmount) | (PriceSpecification | MonetaryAmount)[];
+  /** A contact location for a person's place of work. */
+  workLocation?: (Place | ContactPoint) | (Place | ContactPoint)[];
+  /** An organization that the person is an alumni of. */
+  alumniOf?: (EducationalOrganization | Organization) | (EducationalOrganization | Organization)[];
+  /** The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].
+
+While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
+ */
+  publishingPrinciples?: (CreativeWork | string) | (CreativeWork | string)[];
+  /** An award won by or for this item. */
+  award?: string;
+  /** A parents of the person. */
+  parents?: Person | Person[];
+  /** The job title of the person (for example, Financial Manager). */
+  jobTitle?: (DefinedTerm | string) | (DefinedTerm | string)[];
+  /** A sibling of the person. */
+  siblings?: Person | Person[];
+  /** The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain. */
+  taxID?: string;
+  /** A colleague of the person. */
+  colleagues?: Person | Person[];
+  /** Family name. In the U.S., the last name of a Person. */
+  familyName?: string;
+  /** A credential awarded to the Person or Organization. */
+  hasCredential?: EducationalOccupationalCredential | EducationalOccupationalCredential[];
+  /** A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event. */
+  sponsor?: (Person | Organization) | (Person | Organization)[];
+  /** Event that this person is a performer or participant in. */
+  performerIn?: Event | Event[];
+  /** The number of completed interactions for this entity, in a particular role (the 'agent'), in a particular action (indicated in the statistic), and in a particular context (i.e. interactionService). */
+  agentInteractionStatistic?: InteractionCounter | InteractionCounter[];
+  /** Given name. In the U.S., the first name of a Person. */
+  givenName?: string;
+  /** Organizations that the person works for. */
+  worksFor?: Organization | Organization[];
+  /** A pointer to products or services sought by the organization or person (demand). */
+  seeks?: Demand | Demand[];
+  /** A pointer to products or services offered by the organization or person. */
+  makesOffer?: Offer | Offer[];
+  /** The Value-added Tax ID of the organization or person. */
+  vatID?: string;
+  /** The Dun & Bradstreet DUNS number for identifying an organization or business person. */
+  duns?: string;
+  /** A contact location for a person's residence. */
+  homeLocation?: (Place | ContactPoint) | (Place | ContactPoint)[];
+  /** The fax number. */
+  faxNumber?: string;
+  /** Points-of-Sales operated by the organization or person. */
+  hasPOS?: Place | Place[];
+  /** A parent of this person. */
+  parent?: Person | Person[];
+  /** An additional name for a Person, can be used for a middle name. */
+  additionalName?: string;
+  /** Email address. */
+  email?: string;
+  /** A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles. */
+  callSign?: string;
+  /** Indicates an OfferCatalog listing for this Organization, Person, or Service. */
+  hasOfferCatalog?: OfferCatalog | OfferCatalog[];
+  /** The place where the person died. */
+  deathPlace?: Place | Place[];
+  /** The person's spouse. */
+  spouse?: Person | Person[];
+  /** Things owned by the organization or person. */
+  owns?: Thing | Thing[];
+}
+
+export const Person = Object.assign(vine.object({
+  ...Thing.getProperties(),
+  /** A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]]. */
+  funding: vine.any().optional(),
+  /** An honorific prefix preceding a Person's name such as Dr/Mrs/Mr. */
+  honorificPrefix: vine.string().optional(),
+  /** The weight of the product or person. */
+  weight: vine.any().optional(),
+  /** Awards won by or for this item. */
+  awards: vine.string().optional(),
+  /** The height of the item. */
+  height: vine.any().optional(),
+  /** Of a [[Person]], and less typically of an [[Organization]], to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or [[JobPosting]] descriptions. */
+  knowsAbout: vine.any().optional(),
+  /** Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who are not a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of "Mixed". */
+  gender: vine.any().optional(),
+  /** A person or organization that supports (sponsors) something through some kind of financial contribution. */
+  funder: vine.any().optional(),
+  /** Of a [[Person]], and less typically of an [[Organization]], to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). */
+  knowsLanguage: vine.any().optional(),
+  /** The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person. */
+  brand: vine.any().optional(),
+  /** A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation. */
+  skills: vine.any().optional(),
+  /** The North American Industry Classification System (NAICS) code for a particular organization or business person. */
+  naics: vine.string().optional(),
+  /** The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations. */
+  globalLocationNumber: vine.string().optional(),
+  /** A short string listing or describing pronouns for a person. Typically the person concerned is the best authority as pronouns are a critical part of personal identity and expression. Publishers and consumers of this information are reminded to treat this data responsibly, take country-specific laws related to gender expression into account, and be wary of out-of-date data and drawing unwarranted inferences about the person being described.
+
+In English, formulations such as "they/them", "she/her", and "he/him" are commonly used online and can also be used here. We do not intend to enumerate all possible micro-syntaxes in all languages. More structured and well-defined external values for pronouns can be referenced using the [[StructuredValue]] or [[DefinedTerm]] values.
+ */
+  pronouns: vine.any().optional(),
+  /** Date of death. */
+  deathDate: vine.string().optional(),
+  /** An organization that this person is affiliated with. For example, a school/university, a club, or a team. */
+  affiliation: vine.any().optional(),
+  /** The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. */
+  interactionStatistic: vine.any().optional(),
+  /** A child of the person. */
+  children: vine.any().optional(),
+  /** Physical address of the item. */
+  address: vine.any().optional(),
+  /** The most generic uni-directional social relation. */
+  follows: vine.any().optional(),
+  /** The most generic familial relation. */
+  relatedTo: vine.any().optional(),
+  /** Nationality of the person. */
+  nationality: vine.any().optional(),
+  /** An Organization (or ProgramMembership) to which this Person or Organization belongs. */
+  memberOf: vine.any().optional(),
+  /** Date of birth. */
+  birthDate: vine.string().optional(),
+  /** A contact point for a person or organization. */
+  contactPoint: vine.any().optional(),
+  /** Certification information about a product, organization, service, place, or person. */
+  hasCertification: vine.any().optional(),
+  /** The place where the person was born. */
+  birthPlace: vine.any().optional(),
+  /** The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place. */
+  isicV4: vine.string().optional(),
+  /** The Person's occupation. For past professions, use Role for expressing dates. */
+  hasOccupation: vine.any().optional(),
+  /** A colleague of the person. */
+  colleague: vine.any().optional(),
+  /** A life event like baptism, communions, Bar Mitzvahs, Aqiqah, Namakarana, Miyamairi, burial, .... */
+  lifeEvent: vine.any().optional(),
+  /** An honorific suffix following a Person's name such as M.D./PhD/MSCSW. */
+  honorificSuffix: vine.string().optional(),
+  /** The most generic bi-directional social/work relation. */
+  knows: vine.any().optional(),
+  /** The telephone number. */
+  telephone: vine.string().optional(),
+  /** A sibling of the person. */
+  sibling: vine.any().optional(),
+  /** A contact point for a person or organization. */
+  contactPoints: vine.any().optional(),
+  /** The total financial value of the person as calculated by subtracting the total value of liabilities from the total value of assets. */
+  netWorth: vine.any().optional(),
+  /** A contact location for a person's place of work. */
+  workLocation: vine.any().optional(),
+  /** An organization that the person is an alumni of. */
+  alumniOf: vine.any().optional(),
+  /** The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].
+
+While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
+ */
+  publishingPrinciples: vine.any().optional(),
+  /** An award won by or for this item. */
+  award: vine.string().optional(),
+  /** A parents of the person. */
+  parents: vine.any().optional(),
+  /** The job title of the person (for example, Financial Manager). */
+  jobTitle: vine.any().optional(),
+  /** A sibling of the person. */
+  siblings: vine.any().optional(),
+  /** The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain. */
+  taxID: vine.string().optional(),
+  /** A colleague of the person. */
+  colleagues: vine.any().optional(),
+  /** Family name. In the U.S., the last name of a Person. */
+  familyName: vine.string().optional(),
+  /** A credential awarded to the Person or Organization. */
+  hasCredential: vine.any().optional(),
+  /** A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event. */
+  sponsor: vine.any().optional(),
+  /** Event that this person is a performer or participant in. */
+  performerIn: vine.any().optional(),
+  /** The number of completed interactions for this entity, in a particular role (the 'agent'), in a particular action (indicated in the statistic), and in a particular context (i.e. interactionService). */
+  agentInteractionStatistic: vine.any().optional(),
+  /** Given name. In the U.S., the first name of a Person. */
+  givenName: vine.string().optional(),
+  /** Organizations that the person works for. */
+  worksFor: vine.any().optional(),
+  /** A pointer to products or services sought by the organization or person (demand). */
+  seeks: vine.any().optional(),
+  /** A pointer to products or services offered by the organization or person. */
+  makesOffer: vine.any().optional(),
+  /** The Value-added Tax ID of the organization or person. */
+  vatID: vine.string().optional(),
+  /** The Dun & Bradstreet DUNS number for identifying an organization or business person. */
+  duns: vine.string().optional(),
+  /** A contact location for a person's residence. */
+  homeLocation: vine.any().optional(),
+  /** The fax number. */
+  faxNumber: vine.string().optional(),
+  /** Points-of-Sales operated by the organization or person. */
+  hasPOS: vine.any().optional(),
+  /** A parent of this person. */
+  parent: vine.any().optional(),
+  /** An additional name for a Person, can be used for a middle name. */
+  additionalName: vine.string().optional(),
+  /** Email address. */
+  email: vine.string().optional(),
+  /** A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles. */
+  callSign: vine.string().optional(),
+  /** Indicates an OfferCatalog listing for this Organization, Person, or Service. */
+  hasOfferCatalog: vine.any().optional(),
+  /** The place where the person died. */
+  deathPlace: vine.any().optional(),
+  /** The person's spouse. */
+  spouse: vine.any().optional(),
+  /** Things owned by the organization or person. */
+  owns: vine.any().optional(),
+}).allowUnknownProperties(), {
+  create(data: Person): Person { return data }
+})"
+`;
+
+exports[`full generation produces expected files, compiles, and uses vine: Place.ts 1`] = `
+"// ⚠️ AUTO-GENERATED - schema:Place
+import vine from '@vinejs/vine'
+import { Thing } from './Thing'
+import type { AggregateRating } from './AggregateRating'
+import type { Certification } from './Certification'
+import type { DefinedTerm } from './DefinedTerm'
+import type { Event } from './Event'
+import type { GeoCoordinates } from './GeoCoordinates'
+import type { GeoShape } from './GeoShape'
+import type { GeospatialGeometry } from './GeospatialGeometry'
+import type { ImageObject } from './ImageObject'
+import type { LocationFeatureSpecification } from './LocationFeatureSpecification'
+import type { Map } from './Map'
+import type { OpeningHoursSpecification } from './OpeningHoursSpecification'
+import type { Photograph } from './Photograph'
+import type { PostalAddress } from './PostalAddress'
+import type { PropertyValue } from './PropertyValue'
+import type { Review } from './Review'
+
+/**
+ * Entities that have a somewhat fixed, physical extension.
+ *
+ * @see https://schema.org/Place
+ */
+export interface Place extends Thing {
+  /** Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoCovers?: (GeospatialGeometry | Place) | (GeospatialGeometry | Place)[];
+  /** The special opening hours of a certain place.\\n\\nUse this to explicitly override general opening hours brought in scope by [[openingHoursSpecification]] or [[openingHours]].
+       */
+  specialOpeningHoursSpecification?: OpeningHoursSpecification | OpeningHoursSpecification[];
+  /** A flag to signal that the [[Place]] is open to public visitors.  If this property is omitted there is no assumed default boolean value. */
+  publicAccess?: boolean;
+  /** Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room. */
+  smokingAllowed?: boolean;
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoOverlaps?: (GeospatialGeometry | Place) | (GeospatialGeometry | Place)[];
+  /** The latitude of a location. For example \`\`\`37.42242\`\`\` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)). */
+  latitude?: number | string;
+  /** The opening hours of a certain place. */
+  openingHoursSpecification?: OpeningHoursSpecification | OpeningHoursSpecification[];
+  /** Review of the item. */
+  reviews?: Review | Review[];
+  /** An associated logo. */
+  logo?: (string | ImageObject) | (string | ImageObject)[];
+  /** Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. "a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoContains?: (Place | GeospatialGeometry) | (Place | GeospatialGeometry)[];
+  /** Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property. */
+  keywords?: (string | DefinedTerm) | (string | DefinedTerm)[];
+  /** A slogan or motto associated with the item. */
+  slogan?: string;
+  /** The geo coordinates of the place. */
+  geo?: (GeoShape | GeoCoordinates) | (GeoShape | GeoCoordinates)[];
+  /** The overall rating, based on a collection of reviews or ratings, of the item. */
+  aggregateRating?: AggregateRating | AggregateRating[];
+  /** A URL to a map of the place. */
+  hasMap?: (string | Map) | (string | Map)[];
+  /** The basic containment relation between a place and one that contains it. */
+  containedIn?: Place | Place[];
+  /** The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations. */
+  globalLocationNumber?: string;
+  /** A review of the item. */
+  review?: Review | Review[];
+  /** Upcoming or past event associated with this place, organization, or action. */
+  event?: Event | Event[];
+  /** A page providing information on how to book a tour of some [[Place]], such as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting, as well as other kinds of tours as appropriate. */
+  tourBookingPage?: string;
+  /** Physical address of the item. */
+  address?: (PostalAddress | string) | (PostalAddress | string)[];
+  /** The basic containment relation between a place and another that it contains. */
+  containsPlace?: Place | Place[];
+  /** Upcoming or past events associated with this place or organization. */
+  events?: Event | Event[];
+  /** The basic containment relation between a place and one that contains it. */
+  containedInPlace?: Place | Place[];
+  /** Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship). */
+  geoEquals?: (GeospatialGeometry | Place) | (GeospatialGeometry | Place)[];
+  /** Certification information about a product, organization, service, place, or person. */
+  hasCertification?: Certification | Certification[];
+  /** Indicates whether some facility (e.g. [[FoodEstablishment]], [[CovidTestingFacility]]) offers a service that can be used by driving through in a car. In the case of [[CovidTestingFacility]] such facilities could potentially help with social distancing from other potentially-infected users. */
+  hasDriveThroughService?: boolean;
+  /** A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
+ */
+  additionalProperty?: PropertyValue | PropertyValue[];
+  /** The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place. */
+  isicV4?: string;
+  /** Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: "they have no point in common. They form a set of disconnected geometries." (A symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).) */
+  geoDisjoint?: (Place | GeospatialGeometry) | (Place | GeospatialGeometry)[];
+  /** The longitude of a location. For example \`\`\`-122.08585\`\`\` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)). */
+  longitude?: number | string;
+  /** Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoIntersects?: (Place | GeospatialGeometry) | (Place | GeospatialGeometry)[];
+  /** The telephone number. */
+  telephone?: string;
+  /** A URL to a map of the place. */
+  maps?: string;
+  /** A flag to signal that the item, event, or place is accessible for free. */
+  isAccessibleForFree?: boolean;
+  /** Photographs of this place. */
+  photos?: (Photograph | ImageObject) | (Photograph | ImageObject)[];
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoWithin?: (GeospatialGeometry | Place) | (GeospatialGeometry | Place)[];
+  /** A short textual code (also called "store code") that uniquely identifies a place of business. The code is typically assigned by the parentOrganization and used in structured URLs.\\n\\nFor example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a branchCode for a particular branch.
+       */
+  branchCode?: string;
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoCoveredBy?: (GeospatialGeometry | Place) | (GeospatialGeometry | Place)[];
+  /** The total number of individuals that may attend an event or venue. */
+  maximumAttendeeCapacity?: number;
+  /** A URL to a map of the place. */
+  map?: string;
+  /** Represents spatial relations in which two geometries (or the places they represent) touch: "they have at least one boundary point in common, but no interior points." (A symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).) */
+  geoTouches?: (Place | GeospatialGeometry) | (Place | GeospatialGeometry)[];
+  /** The fax number. */
+  faxNumber?: string;
+  /** The <a href="https://www.gs1.org/standards/gs1-digital-link">GS1 digital link</a> associated with the object. This URL should conform to the particular requirements of digital links. The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated, for instance a [[Product]] or an [[Organization]], and for the correct granularity. In particular, for products:<ul><li>A Digital Link that contains a serial number (AI <code>21</code>) should only be present on instances of [[IndividualProduct]]</li><li>A Digital Link that contains a lot number (AI <code>10</code>) should be annotated as [[SomeProduct]] if only products from that lot are sold, or [[IndividualProduct]] if there is only a specific product.</li><li>A Digital Link that contains a global model number (AI <code>8013</code>)  should be attached to a [[Product]] or a [[ProductModel]].</li></ul> Other item types should be adapted similarly. */
+  hasGS1DigitalLink?: string;
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoCrosses?: (Place | GeospatialGeometry) | (Place | GeospatialGeometry)[];
+  /** A photograph of this place. */
+  photo?: (Photograph | ImageObject) | (Photograph | ImageObject)[];
+  /** An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs. */
+  amenityFeature?: LocationFeatureSpecification | LocationFeatureSpecification[];
+}
+
+export const Place = Object.assign(vine.object({
+  ...Thing.getProperties(),
+  /** Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoCovers: vine.any().optional(),
+  /** The special opening hours of a certain place.\\n\\nUse this to explicitly override general opening hours brought in scope by [[openingHoursSpecification]] or [[openingHours]].
+       */
+  specialOpeningHoursSpecification: vine.any().optional(),
+  /** A flag to signal that the [[Place]] is open to public visitors.  If this property is omitted there is no assumed default boolean value. */
+  publicAccess: vine.boolean().optional(),
+  /** Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room. */
+  smokingAllowed: vine.boolean().optional(),
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoOverlaps: vine.any().optional(),
+  /** The latitude of a location. For example \`\`\`37.42242\`\`\` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)). */
+  latitude: vine.any().optional(),
+  /** The opening hours of a certain place. */
+  openingHoursSpecification: vine.any().optional(),
+  /** Review of the item. */
+  reviews: vine.any().optional(),
+  /** An associated logo. */
+  logo: vine.any().optional(),
+  /** Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. "a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoContains: vine.any().optional(),
+  /** Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property. */
+  keywords: vine.any().optional(),
+  /** A slogan or motto associated with the item. */
+  slogan: vine.string().optional(),
+  /** The geo coordinates of the place. */
+  geo: vine.any().optional(),
+  /** The overall rating, based on a collection of reviews or ratings, of the item. */
+  aggregateRating: vine.any().optional(),
+  /** A URL to a map of the place. */
+  hasMap: vine.any().optional(),
+  /** The basic containment relation between a place and one that contains it. */
+  containedIn: vine.any().optional(),
+  /** The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations. */
+  globalLocationNumber: vine.string().optional(),
+  /** A review of the item. */
+  review: vine.any().optional(),
+  /** Upcoming or past event associated with this place, organization, or action. */
+  event: vine.any().optional(),
+  /** A page providing information on how to book a tour of some [[Place]], such as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting, as well as other kinds of tours as appropriate. */
+  tourBookingPage: vine.string().url().optional(),
+  /** Physical address of the item. */
+  address: vine.any().optional(),
+  /** The basic containment relation between a place and another that it contains. */
+  containsPlace: vine.any().optional(),
+  /** Upcoming or past events associated with this place or organization. */
+  events: vine.any().optional(),
+  /** The basic containment relation between a place and one that contains it. */
+  containedInPlace: vine.any().optional(),
+  /** Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship). */
+  geoEquals: vine.any().optional(),
+  /** Certification information about a product, organization, service, place, or person. */
+  hasCertification: vine.any().optional(),
+  /** Indicates whether some facility (e.g. [[FoodEstablishment]], [[CovidTestingFacility]]) offers a service that can be used by driving through in a car. In the case of [[CovidTestingFacility]] such facilities could potentially help with social distancing from other potentially-infected users. */
+  hasDriveThroughService: vine.boolean().optional(),
+  /** A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
+ */
+  additionalProperty: vine.any().optional(),
+  /** The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place. */
+  isicV4: vine.string().optional(),
+  /** Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: "they have no point in common. They form a set of disconnected geometries." (A symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).) */
+  geoDisjoint: vine.any().optional(),
+  /** The longitude of a location. For example \`\`\`-122.08585\`\`\` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)). */
+  longitude: vine.any().optional(),
+  /** Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoIntersects: vine.any().optional(),
+  /** The telephone number. */
+  telephone: vine.string().optional(),
+  /** A URL to a map of the place. */
+  maps: vine.string().url().optional(),
+  /** A flag to signal that the item, event, or place is accessible for free. */
+  isAccessibleForFree: vine.boolean().optional(),
+  /** Photographs of this place. */
+  photos: vine.any().optional(),
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoWithin: vine.any().optional(),
+  /** A short textual code (also called "store code") that uniquely identifies a place of business. The code is typically assigned by the parentOrganization and used in structured URLs.\\n\\nFor example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a branchCode for a particular branch.
+       */
+  branchCode: vine.string().optional(),
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoCoveredBy: vine.any().optional(),
+  /** The total number of individuals that may attend an event or venue. */
+  maximumAttendeeCapacity: vine.number().optional(),
+  /** A URL to a map of the place. */
+  map: vine.string().url().optional(),
+  /** Represents spatial relations in which two geometries (or the places they represent) touch: "they have at least one boundary point in common, but no interior points." (A symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).) */
+  geoTouches: vine.any().optional(),
+  /** The fax number. */
+  faxNumber: vine.string().optional(),
+  /** The <a href="https://www.gs1.org/standards/gs1-digital-link">GS1 digital link</a> associated with the object. This URL should conform to the particular requirements of digital links. The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated, for instance a [[Product]] or an [[Organization]], and for the correct granularity. In particular, for products:<ul><li>A Digital Link that contains a serial number (AI <code>21</code>) should only be present on instances of [[IndividualProduct]]</li><li>A Digital Link that contains a lot number (AI <code>10</code>) should be annotated as [[SomeProduct]] if only products from that lot are sold, or [[IndividualProduct]] if there is only a specific product.</li><li>A Digital Link that contains a global model number (AI <code>8013</code>)  should be attached to a [[Product]] or a [[ProductModel]].</li></ul> Other item types should be adapted similarly. */
+  hasGS1DigitalLink: vine.string().url().optional(),
+  /** Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). */
+  geoCrosses: vine.any().optional(),
+  /** A photograph of this place. */
+  photo: vine.any().optional(),
+  /** An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs. */
+  amenityFeature: vine.any().optional(),
+}).allowUnknownProperties(), {
+  create(data: Place): Place { return data }
+})"
+`;
+
+exports[`full generation produces expected files, compiles, and uses vine: Thing.ts 1`] = `
+"// ⚠️ AUTO-GENERATED - schema:Thing
+import vine from '@vinejs/vine'
+import type { Action } from './Action'
+import type { CreativeWork } from './CreativeWork'
+import type { Event } from './Event'
+import type { ImageObject } from './ImageObject'
+import type { Organization } from './Organization'
+import type { Person } from './Person'
+import type { PropertyValue } from './PropertyValue'
+import type { TextObject } from './TextObject'
+
+/**
+ * The most generic type of item.
+ *
+ * @see https://schema.org/Thing
+ */
+export interface Thing {
+  /** URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website. */
+  sameAs?: string;
+  /** The name of the item. */
+  name?: string;
+  /** An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+    use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>. */
+  additionalType?: string;
+  /** The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.
+         */
+  identifier?: (string | PropertyValue) | (string | PropertyValue)[];
+  /** A person or organization who owns this Thing. */
+  owner?: (Person | Organization) | (Person | Organization)[];
+  /** A CreativeWork or Event about this Thing. */
+  subjectOf?: (Event | CreativeWork) | (Event | CreativeWork)[];
+  /** Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details. */
+  mainEntityOfPage?: (CreativeWork | string) | (CreativeWork | string)[];
+  /** Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. */
+  potentialAction?: Action | Action[];
+  /** A description of the item. */
+  description?: (TextObject | string) | (TextObject | string)[];
+  /** An alias for the item. */
+  alternateName?: string;
+  /** URL of the item. */
+  url?: string;
+  /** An image of the item. This can be a [[URL]] or a fully described [[ImageObject]]. */
+  image?: (ImageObject | string) | (ImageObject | string)[];
+  /** A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation. */
+  disambiguatingDescription?: string;
+}
+
+export const Thing = Object.assign(vine.object({
+  /** URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website. */
+  sameAs: vine.string().url().optional(),
+  /** The name of the item. */
+  name: vine.string().optional(),
+  /** An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+    use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>. */
+  additionalType: vine.any().optional(),
+  /** The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.
+         */
+  identifier: vine.any().optional(),
+  /** A person or organization who owns this Thing. */
+  owner: vine.any().optional(),
+  /** A CreativeWork or Event about this Thing. */
+  subjectOf: vine.any().optional(),
+  /** Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details. */
+  mainEntityOfPage: vine.any().optional(),
+  /** Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role. */
+  potentialAction: vine.any().optional(),
+  /** A description of the item. */
+  description: vine.any().optional(),
+  /** An alias for the item. */
+  alternateName: vine.string().optional(),
+  /** URL of the item. */
+  url: vine.string().url().optional(),
+  /** An image of the item. This can be a [[URL]] or a fully described [[ImageObject]]. */
+  image: vine.any().optional(),
+  /** A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation. */
+  disambiguatingDescription: vine.string().optional(),
+}).allowUnknownProperties(), {
+  create(data: Thing): Thing { return data }
+})"
+`;
