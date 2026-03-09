@@ -1,5 +1,7 @@
 export * from './generated'
 export { createCustomSchemas } from './customize'
+export { classifyProperty, classifyAllProperties, isEntityType, isFactoidType, findTypeRefs } from './classify-property'
+export type { PropertyKind } from './classify-property'
 
 export type SchemaProperty = {
     type: string;

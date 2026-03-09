@@ -331,7 +331,14 @@ export async function convertTypes(types: ParsedType[], outDir = 'src/generated/
 
     // Build type reference metadata for customization support
     // Maps each type to its parent and which properties reference which types
-    const schemaMeta: Record<string, { parent?: string; typeRefs: Record<string, string[]> }> = {}
+    const schemaMeta: Record<string, { parent?: string; isDataType?: boolean; isEnumeration?: boolean; typeRefs: Record<string, string[]> }> = {}
+
+    // Include DataType primitives in metadata (they were filtered from type generation
+    // but consumers need to know about them for property classification)
+    for (const schemaId of Object.keys(DATA_TYPE_MAP)) {
+        const name = schemaId.replace('schema:', '')
+        schemaMeta[name] = { isDataType: true, typeRefs: {} }
+    }
     for (const t of types) {
         const name = makeSafeName(t.label || t.id)
         const parentNames: string[] = []
@@ -368,6 +375,8 @@ export async function convertTypes(types: ParsedType[], outDir = 'src/generated/
         }
         schemaMeta[name] = {
             parent: parentNames[0],
+            ...(t.isEnumeration ? { isEnumeration: true } : {}),
+            ...(schemaMeta[name]?.isDataType ? { isDataType: true } : {}),
             typeRefs,
         }
     }

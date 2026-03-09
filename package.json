@@ -8,7 +8,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./classify": {
+      "types": "./dist/classify-property.d.ts",
+      "default": "./dist/classify-property.js"
+    },
+    "./schema-meta": "./src/generated/schema-meta.json"
   },
   "files": [
     "dist",
