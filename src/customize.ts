@@ -18,6 +18,10 @@ type InferSchemaData<T> = T extends { create(data: infer D): any } ? D : never
 /** Registry for overrides-only (no wrapping) */
 type SchemaRegistry = { [K in keyof AllSchemas]: AllSchemas[K] }
 
+/** Schema.org data type with a literal `type` discriminant for union narrowing. */
+export type SchemaType<K extends keyof AllSchemas & string> =
+    InferSchemaData<AllSchemas[K]> & { type: K }
+
 // ---------------------------------------------------------------------------
 // Options
 // ---------------------------------------------------------------------------
@@ -169,8 +173,13 @@ function topologicalSort(affected: Set<string>): string[] {
 /**
  * Wraps all properties of a VineJS object schema with the declarative pattern:
  * each property becomes vine.array(vine.object({...extra, value: vine.any()})).optional()
+ *
+ * If the additional properties include a `type` field, it is narrowed to a
+ * single-value enum of the schema's own type name so that discriminated union
+ * narrowing works at the TypeScript level.
  */
 function wrapSchemaProperties(
+    typeName: string,
     schema: any,
     additionalProperties: ReturnType<typeof vine.object>,
 ): any {
@@ -178,8 +187,14 @@ function wrapSchemaProperties(
         ? schema.getProperties()
         : {}
     const extraProps = typeof additionalProperties.getProperties === 'function'
-        ? additionalProperties.getProperties()
+        ? { ...additionalProperties.getProperties() }
         : {}
+
+    // Narrow `type` to a literal enum for this specific schema type
+    if ('type' in extraProps) {
+        extraProps.type = vine.enum([typeName])
+    }
+
     const wrappedProps: Record<string, any> = {}
 
     for (const propName of Object.keys(props)) {
@@ -252,7 +267,7 @@ export function createCustomSchemas(
             const schema = registry[typeName] ?? (allSchemas as any)[typeName]
             if (!schema || typeof schema.getProperties !== 'function') continue
 
-            const wrapped = wrapSchemaProperties(schema, additionalProperties)
+            const wrapped = wrapSchemaProperties(typeName, schema, additionalProperties)
             registry[typeName] = Object.assign(wrapped, {
                 create(data: unknown) { return data },
             })

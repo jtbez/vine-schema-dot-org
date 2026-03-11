@@ -164,6 +164,7 @@ export async function convertTypes(types: ParsedType[], outDir = 'src/generated/
         const lines: string[] = []
         lines.push(`// ⚠️ AUTO-GENERATED - ${t.id}`)
         lines.push("import vine from '@vinejs/vine'")
+        // SchemaKey import not needed — each interface uses its own literal type
 
         // Handle enumeration types with members: generate vine.enum() instead of object schema
         if (t.isEnumeration && t.enumerationValues && t.enumerationValues.length > 0) {
@@ -307,8 +308,10 @@ export async function convertTypes(types: ParsedType[], outDir = 'src/generated/
         const schemaOrgUrl = `https://schema.org/${t.label || name}`
         const typeJSDoc = formatJSDoc(t.comment, [`@see ${schemaOrgUrl}`])
         lines.push(...typeJSDoc)
-        const ifaceHeader = parentNames.length > 0 ? `export interface ${name} extends ${parentNames[0]} {` : `export interface ${name} {`
+        const ifaceHeader = parentNames.length > 0 ? `export interface ${name} extends Omit<${parentNames[0]}, 'type'> {` : `export interface ${name} {`
         lines.push(ifaceHeader)
+        lines.push(`  /** The schema.org type name. */`)
+        lines.push(`  type?: '${name}';`)
         lines.push(...tsPropLines)
         lines.push('}')
         lines.push('')
@@ -320,6 +323,8 @@ export async function convertTypes(types: ParsedType[], outDir = 'src/generated/
         } else {
             lines.push(`export const ${name} = Object.assign(vine.object({`)
         }
+        lines.push(`  /** The schema.org type name. */`)
+        lines.push(`  type: vine.enum(['${name}']).optional(),`)
         lines.push(...propLines)
         lines.push(`}).allowUnknownProperties(), {`)
         lines.push(`  create(data: ${name}): ${name} { return data }`)
@@ -405,8 +410,20 @@ export async function convertTypes(types: ParsedType[], outDir = 'src/generated/
     await fs.mkdir(root, { recursive: true })
     const typesRel = path.relative(root, outDir).split(path.sep).join('/')
 
+    // generated/schema-key.ts — union type of all schema names + SCHEMA_KEYS constant
+    const schemaKeyLines: string[] = [
+        '// ⚠️ AUTO-GENERATED — DO NOT EDIT',
+        `export type SchemaKey = ${exports.map(n => `'${n}'`).join(' | ')}`,
+        '',
+        `export const SCHEMA_KEYS: SchemaKey[] = [${exports.map(n => `'${n}'`).join(', ')}]`,
+    ]
+    await fs.writeFile(path.join(root, 'schema-key.ts'), schemaKeyLines.join('\n') + '\n', 'utf8')
+
     // generated/index.ts — exports VineJS schemas, interfaces, and enum values
-    const schemaExportLines = exports.map((n) => `export * from './${typesRel}/${n}'`)
+    const schemaExportLines = [
+        `export * from './schema-key'`,
+        ...exports.map((n) => `export * from './${typesRel}/${n}'`),
+    ]
     await fs.writeFile(path.join(root, 'index.ts'), schemaExportLines.join('\n') + '\n', 'utf8')
 
     // Write schema metadata for customization support

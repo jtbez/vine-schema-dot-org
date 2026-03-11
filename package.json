@@ -13,7 +13,7 @@
       "types": "./dist/classify-property.d.ts",
       "default": "./dist/classify-property.js"
     },
-    "./schema-meta": "./src/generated/schema-meta.json"
+    "./schema-meta": "./dist/schema-meta.json"
   },
   "files": [
     "dist",
@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "generate": "tsc -p tsconfig.generator.json && node dist/generator.js",
-    "build": "rm -rf src/generated && pnpm run generate && tsc -p tsconfig.build.json",
+    "build": "rm -rf src/generated && pnpm run generate && tsc -p tsconfig.build.json && cp src/generated/schema-meta.json dist/schema-meta.json",
     "test": "jest --config jest.config.cjs",
     "prepare": "pnpm run build"
   },
