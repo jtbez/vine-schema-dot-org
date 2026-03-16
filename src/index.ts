@@ -3,6 +3,7 @@ export { createCustomSchemas } from './customize'
 export type { SchemaType } from './customize'
 export { classifyProperty, classifyAllProperties, isEntityType, isFactoidType, findTypeRefs } from './classify-property'
 export type { PropertyKind } from './classify-property'
+export { INVERSE_PROPERTIES, getInverseProperty } from './inverse-properties'
 
 export type SchemaProperty = {
     type: string;

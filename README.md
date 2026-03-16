@@ -241,6 +241,29 @@ const bad: Place = schemas.Place.create({ ... })
 - Cascading type overrides via `createCustomSchemas()`
 - TypeScript type inference for every schema
 
+## Inverse Properties
+
+The package exposes a utility for working with Schema.org's `schema:inverseOf` annotations — property pairs where each direction implies the other (e.g. `containedInPlace` ↔ `containsPlace`).
+
+```ts
+import { getInverseProperty, INVERSE_PROPERTIES } from '@linxhq/vine-schema-dot-org'
+
+getInverseProperty('containedInPlace')  // → 'containsPlace'
+getInverseProperty('memberOf')          // → 'member'
+getInverseProperty('name')              // → undefined (no inverse)
+
+// All 58 pairs as a plain record
+INVERSE_PROPERTIES['containsPlace']     // → 'containedInPlace'
+```
+
+Also importable via the dedicated entry point:
+
+```ts
+import { getInverseProperty } from '@linxhq/vine-schema-dot-org/inverse-properties'
+```
+
+The mapping is fully derived from Schema.org's own `schema:inverseOf` annotations and is regenerated automatically when `pnpm run build` runs. Adding a new inverse pair to the Schema.org spec will be picked up on the next build with no manual changes needed.
+
 ## Development
 
 ### Prerequisites
@@ -253,22 +276,29 @@ const bad: Place = schemas.Place.create({ ... })
 | Command | Description |
 | --- | --- |
 | `pnpm install` | Installs dependencies and runs a full build via `prepare` |
-| `pnpm run build` | Clean generate + compile (`rm src/generated → generate → tsc`) |
-| `pnpm run generate` | Compile generator + run it to produce `src/generated/` |
+| `pnpm run build` | Clean generate + compile + copy JSON artifacts (`schema-meta.json`, `schema-inverse-properties.json`) |
+| `pnpm run generate` | Compile generator + run it to produce `src/generated/` (types, schema-meta.json, schema-inverse-properties.json) |
 | `pnpm test` | Run tests |
 
 ### Project Structure
 
 ```
 src/
-  generate/       # Generator pipeline (fetch, parse, convert, emit)
-  generated/      # Auto-generated Zod schemas (do not edit)
-    index.ts      # Barrel — exports all schemas and types
-  customize.ts    # createCustomSchemas() — overrides and property wrapping
-  index.ts        # Public API entry point
+  fetch.ts              # Fetches schema.org JSON-LD
+  parse.ts              # Parses RDF graph → typed structure (incl. inverseOf)
+  convert.ts            # Generates TS types + schema-meta.json + schema-inverse-properties.json
+  generator.ts          # Entry point: fetch → parse → convert
+  generated/            # Auto-generated (do not edit)
+    index.ts            # Barrel — exports all VineJS schemas and types
+    schema-meta.json    # Type hierarchy + property typeRefs
+    schema-inverse-properties.json  # inverseOf pairs (58 pairs from Schema.org)
+  classify-property.ts  # isEntityType(), isFactoidType(), classifyProperty()
+  inverse-properties.ts # getInverseProperty(), INVERSE_PROPERTIES
+  customize.ts          # createCustomSchemas() — overrides and property wrapping
+  index.ts              # Public API entry point
 ```
 
-> `src/generated/` is auto-generated. Do not edit files in it directly — fix issues in `src/generate/` instead.
+> `src/generated/` is auto-generated. Do not edit files in it directly — run `pnpm run generate` to rebuild after changes to `parse.ts` or `convert.ts`.
 
 ## Contributing
 

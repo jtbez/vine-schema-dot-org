@@ -13,7 +13,12 @@
       "types": "./dist/classify-property.d.ts",
       "default": "./dist/classify-property.js"
     },
-    "./schema-meta": "./dist/schema-meta.json"
+    "./inverse-properties": {
+      "types": "./dist/inverse-properties.d.ts",
+      "default": "./dist/inverse-properties.js"
+    },
+    "./schema-meta": "./dist/schema-meta.json",
+    "./schema-inverse-properties": "./dist/schema-inverse-properties.json"
   },
   "files": [
     "dist",
@@ -22,7 +27,7 @@
   ],
   "scripts": {
     "generate": "tsc -p tsconfig.generator.json && node dist/generator.js",
-    "build": "rm -rf src/generated && pnpm run generate && tsc -p tsconfig.build.json && cp src/generated/schema-meta.json dist/schema-meta.json",
+    "build": "rm -rf src/generated && pnpm run generate && tsc -p tsconfig.build.json && cp src/generated/schema-meta.json dist/schema-meta.json && cp src/generated/schema-inverse-properties.json dist/schema-inverse-properties.json",
     "test": "jest --config jest.config.cjs",
     "prepare": "pnpm run build"
   },

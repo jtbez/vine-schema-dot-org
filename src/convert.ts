@@ -430,6 +430,30 @@ export async function convertTypes(types: ParsedType[], outDir = 'src/generated/
     const metaPath = path.join(root, 'schema-meta.json')
     await fs.writeFile(metaPath, JSON.stringify(schemaMeta, null, 2), 'utf8')
 
+    // Build inverse property map from schema:inverseOf annotations.
+    // Maps property label → inverse property label (both directions).
+    // e.g. { containedInPlace: 'containsPlace', containsPlace: 'containedInPlace', ... }
+    const propIdToLabel: Record<string, string> = {}
+    for (const t of types) {
+        for (const p of t.properties) {
+            const rawLabel = typeof p.label === 'object' ? (p.label as any)['@value'] || String(p.label) : String(p.label)
+            propIdToLabel[p.id] = rawLabel
+        }
+    }
+    const inverseProperties: Record<string, string> = {}
+    for (const t of types) {
+        for (const p of t.properties) {
+            if (!p.inverseOf) continue
+            const rawLabel = typeof p.label === 'object' ? (p.label as any)['@value'] || String(p.label) : String(p.label)
+            const inverseLabel = propIdToLabel[p.inverseOf]
+            if (inverseLabel) {
+                inverseProperties[rawLabel] = inverseLabel
+            }
+        }
+    }
+    const inversePropsPath = path.join(root, 'schema-inverse-properties.json')
+    await fs.writeFile(inversePropsPath, JSON.stringify(inverseProperties, null, 2), 'utf8')
+
     // Compute all typeRefs (own + inherited) for each type
     function getAllTypeRefs(typeName: string): Record<string, string[]> {
         const entry = schemaMeta[typeName]

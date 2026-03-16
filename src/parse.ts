@@ -5,6 +5,7 @@ export type ParsedProperty = {
     label: string
     comment?: string
     rangeIncludes: string[]
+    inverseOf?: string
 }
 
 export type ParsedType = {
@@ -69,6 +70,11 @@ export async function parseSchemaJson(filePath: string): Promise<ParsedType[]> {
             }
         }
 
+        const rawInverse = prop['schema:inverseOf']
+        const inverseOf: string | undefined = rawInverse
+            ? (rawInverse['@id'] || rawInverse['id'] || String(rawInverse))
+            : undefined
+
         for (const domain of domains) {
             if (types[domain]) {
                 types[domain].properties.push({
@@ -76,6 +82,7 @@ export async function parseSchemaJson(filePath: string): Promise<ParsedType[]> {
                     label: prop['rdfs:label'] || prop['label'] || prop['@id'] || prop['id'],
                     comment: prop['rdfs:comment'] || prop['comment'],
                     rangeIncludes: ranges.map(String),
+                    inverseOf,
                 })
             }
         }
